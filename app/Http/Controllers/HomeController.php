@@ -7,15 +7,16 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ParticipantsImport;
 use App\Exports\ScheduleExport;
 use App\Models\Schedule;
+use App\Models\Gelombang;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('adminpage');
+        $gelombangData = Gelombang::all();
+        return view('adminpage', compact('gelombangData'));
     }
 
-    // Menghandle upload dan proses jadwal
     public function processParticipants(Request $request)
     {
         // Validasi file yang diupload
@@ -27,13 +28,8 @@ class HomeController extends Controller
         $file = $request->file('participants_file');
 
         try {
-            // Mengimpor data peserta dari Excel
             $participants = Excel::toArray(new ParticipantsImport, $file)[0];
-
-            // Proses peserta menjadi jadwal
             $scheduleData = $this->generateSchedule($participants);
-
-            // Mengexport jadwal ke file Excel
             return Excel::download(new ScheduleExport($scheduleData), 'schedule.xlsx');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -42,7 +38,6 @@ class HomeController extends Controller
 
     private function generateSchedule(array $participants)
     {
-        // Contoh sederhana: Membagi peserta menjadi kelompok
         $schedule = [];
         $groupSize = 5; // Misalnya, 5 peserta per sesi
 
