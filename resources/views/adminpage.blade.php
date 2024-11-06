@@ -172,7 +172,7 @@
                                             <input type="file" name="file3" id="file3" required>
                                         </div>
                                     </div>   
-                                    <button type="submit">Buat Jadwalcscsc</button>
+                                    <button type="submit">Buat Jadwal ini revisi</button>
                             </form>
                             </div>0
                         </div>
