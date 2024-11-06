@@ -231,7 +231,7 @@
         <input type="date" id="date" name="date" required> <!-- Added name attribute -->
         
         <label for="gelombang">Gelombang</label>
-        <select id="gelombang" name="gelombang" required> <!-- Added name attribute -->
+        <select id="gelombang" name="gelombang" required> 
             <option value="1">Gelombang 1</option>
             <option value="2">Gelombang 2</option>
             <option value="3">Gelombang 3</option>
