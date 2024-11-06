@@ -172,9 +172,9 @@
                                             <input type="file" name="file3" id="file3" required>
                                         </div>
                                     </div>   
-                                    <button type="submit">Buat Jadwal</button>
+                                    <button type="submit">Buat Jadwalcscsc</button>
                             </form>
-                            </div>
+                            </div>0
                         </div>
                     @endforeach
                 </div>
