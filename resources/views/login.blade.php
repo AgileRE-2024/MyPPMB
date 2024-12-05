@@ -110,34 +110,20 @@
 <body>
     <div class="login-container">
         <h2><i class="fas fa-sign-in-alt"></i>Login</h2>
-        <form id="loginForm" onsubmit="return handleLogin(event)">
+        <form id="loginForm" action="{{ route('login') }}" method="POST">
+            @csrf
             <div>
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
             <div>
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
             <div>
-                <button type="submit">Login</button>
+            <button type="submit">Login</button>
             </div>
         </form>
     </div>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault(); 
-            const username = document.getElementById('username').value;
-
-            if (username === 'admin') {
-                window.location.href = '/home';
-            } else if (username === 'user') {
-                window.location.href = '/userhome';
-            } else {
-                alert('Invalid username'); 
-            }
-        }
-    </script>
 </body>
 </html>
