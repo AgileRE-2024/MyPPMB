@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('id_pewawancara')->primary();;
             $table->string('pewawancara_name');
             $table->timestamps();
-            $table->string('password')->default(Str::random(10));
+            $table->string('password')->default('password');
         });
 
         Schema::create('detail_wawancara', function (Blueprint $table) {
