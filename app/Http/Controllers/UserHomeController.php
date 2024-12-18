@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\DetailWawancara;
 use App\Models\Gelombang;
 use App\Models\Peserta;
+use App\Models\Ruang;
 use Illuminate\Http\Request;
 
 class UserHomeController extends Controller
@@ -40,12 +40,14 @@ class UserHomeController extends Controller
         }
     }
 
-    return view('user', [
-        'link_detail' => $results,
-        'pesertaPerGelombang' => $pesertaPerGelombang,
-        ]);
-    }
+        $link = Ruang::all();
+        $totalParticipants = Peserta::count(); 
+        $totalZoomLinks = $link->count(); 
+        $activeGelombang = Gelombang::where('status', true)->count(); 
+        $link_detail = $results;
+        return view('user', compact('link_detail', 'pesertaPerGelombang', 'totalParticipants', 'totalZoomLinks', 'activeGelombang'));
 
+    }
     public function updateDetail(Request $request, $id)
     {
         $request->validate([
@@ -67,7 +69,4 @@ class UserHomeController extends Controller
         ]);
         return redirect()->back()->with('success', 'Participant details updated successfully!');
     }
-
-    
-
 }

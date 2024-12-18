@@ -18,9 +18,9 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/nilai', [HomeController::class, 'nilai']);
+Route::get('/format', [HomeController::class, 'format']);
 Route::get('/pimpinan', [HomeController::class, 'pimpinan']);
 Route::get('/download/{id_gelombang}', [HomeController::class, 'download'])->name('download');
-
 
 Route::get('/userhome', [UserHomeController::class, 'index']);
 Route::post('/update-detail/{id}', [UserHomeController::class, 'updateDetail'])->name('updateDetail');
