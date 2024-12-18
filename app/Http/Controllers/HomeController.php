@@ -14,9 +14,21 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $gelombangData = Gelombang::all();
-        session(['gelombangData' => $gelombangData]);
-        return view('adminpage', compact('gelombangData'));
+        $totalGelombang = Gelombang::count(); // Count total gelombang
+        $activeGelombang = Gelombang::where('status', true)->count(); // Count active gelombang
+        $inactiveGelombang = Gelombang::where('status', false)->count(); // Count inactive gelombang
+        $importedGelombang = Gelombang::whereNotNull('file_path')->count(); // Count gelombang with imported files
+    
+        $gelombangData = Gelombang::all(); // Replace with your actual query
+    
+        // Pass variables to the view
+        return view('adminpage', compact(
+            'totalGelombang',
+            'activeGelombang',
+            'inactiveGelombang',
+            'importedGelombang',
+            'gelombangData'
+        ));
     }
     public function processParticipants(Request $request)
     {
@@ -56,6 +68,7 @@ class HomeController extends Controller
         ->join('pewawancara','detail_wawancara.id_pewawancara','=','pewawancara.id_pewawancara')
         ->get()
         ->groupBy('id_gelombang'); 
+
 
         foreach ($detail as $gelombangId => $items) {
             $totalPeserta = $items->count();
@@ -101,6 +114,11 @@ class HomeController extends Controller
         session(['detail' => $pimpinan]);
         return view('pimpinan', ['detail' => $pimpinan]);
 
+    }
+
+    public function format()
+    {
+        return view('format');
     }
 
 }

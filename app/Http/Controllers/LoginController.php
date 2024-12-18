@@ -66,7 +66,6 @@ class LoginController extends Controller
 
     return redirect()->back()->withErrors(['login_error' => 'Invalid username or password.']);
     }
-
     public function logout()
     {
         session()->flush();

@@ -144,7 +144,7 @@ class ExcelMergeController extends Controller
             ->setBorderStyle(Border::BORDER_THIN);
 
         $gelombang = Gelombang::find($gel_id);
-        $fileName = $gelombang->gelombang_name . '_Semester_' . $gelombang->semester . '_Tanggal_' . $gelombang->date . '.xlsx';
+        $fileName = 'Merged_File_' . now()->format('Ymd_His') . '.xlsx';
         $filePath = storage_path('app/' . $fileName);
         $writer = new Xlsx($spreadsheet);
         $writer->save($filePath);
