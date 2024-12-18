@@ -93,5 +93,3 @@ Key commands include:
 
 This project is licensed under the **MIT License**. Enjoy using the Laravel project, and feel free to open an issue on the repository if you encounter any problems! 🎉
 ```
-
-This complete markdown file is structured neatly and includes all necessary instructions in a single section for easy readability and usage. Let me know if you'd like further adjustments! 🚀
