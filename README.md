@@ -1,12 +1,10 @@
 <p align="center">MyPPMB</p>
 
-<p align="center">
 
-</p>
 
 ## Installation Guide
 
-Welcome to the Laravel project! To set up and run the project locally, ensure your system meets the requirements: PHP 8.1 or higher, Composer, MySQL, Git, and a web browser.
+To set up and run our project locally, ensure your system meets the requirements: <b>PHP 8.1 or higher, Composer, MySQL, Git, and a web browser.</b>
 
 Start by cloning the repository with `git clone https://github.com/username/my-laravel-project.git` and navigate to the directory using `cd my-laravel-project`. Install dependencies by running `composer install`.
 
@@ -20,7 +18,7 @@ Start the development server by running `php artisan serve` and open the applica
 
 If you encounter issues, ensure database credentials in `.env` are correct, all dependencies are installed using `composer install`, and clear the configuration cache if needed with `php artisan config:clear`. 
 
-To run tests (if available), use `php artisan test`. 
+To run tests, use `php artisan test`. 
 
 The main directory structure includes core application files (`app/`), configuration (`config/`), migrations (`database/migrations/`), seeders (`database/seeders/`), public assets (`public/`), views and templates (`resources/`), routes (`routes/`), and storage for logs and uploads (`storage/`). 
 
