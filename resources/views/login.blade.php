@@ -4,126 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #3b82f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            width: 350px; 
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
-            text-align: center;
-            font-size: 1.8rem;
-            position: relative;
-        }
-
-        .login-container h2 i {
-            color: #007BFF;
-            margin-right: 8px;
-            font-size: 1.5rem;
-        }
-
-        .login-container div {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .login-container label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            text-align: left;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            box-sizing: border-box;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            font-size: 1rem;
-        }
-
-        .login-container input:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-            outline: none;
-        }
-
-        .login-container input::placeholder {
-            color: #aaa;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 30px;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .login-container button:hover {
-            background-color: #0056b3;
-            transform: scale(1.02);
-        }
-
-        .login-container button:active {
-            transform: scale(1);
-        }
-
-        .login-container::before {
-            content: "";
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background-color: rgba(0, 123, 255, 0.1);
-            top: -50%;
-            left: -50%;
-            transform: rotate(45deg);
-            z-index: -1;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="login-container">
-        <h2><i class="fas fa-sign-in-alt"></i>Login</h2>
-        <form id="loginForm" action="{{ route('login') }}" method="POST">
+<body class="bg-blue-500 flex items-center justify-center min-h-screen bg-cover bg-center relative" style="background-image: url('https://unair.ac.id/wp-content/uploads/2016/02/Top-500-1.jpg');">
+    <div class="absolute inset-0 bg-blue-500 opacity-75"></div>
+
+    <div class="bg-white bg-opacity-90 backdrop-blur-sm p-8 rounded-lg shadow-lg w-full max-w-md relative z-10">
+        <div class="absolute inset-0 transform rotate-45 bg-blue-100 opacity-10 -z-10"></div>
+        
+        <h2 class="text-2xl font-bold text-gray-700 text-center flex items-center justify-center mb-6">
+            <i class="fas fa-sign-in-alt text-blue-500 mr-2"></i> MyPPMB Login
+        </h2>
+        
+        @if($errors->has('login_error'))
+            <div class="bg-red-100 text-red-600 p-3 rounded-md text-sm mb-4">
+                {{ $errors->first('login_error') }}
+            </div>
+        @endif
+
+        <form id="loginForm" action="{{ route('login') }}" method="POST" class="space-y-6">
             @csrf
             <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Enter your username" 
+                    required
+                    class="w-full px-4 py-3 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+                >
             </div>
+            
             <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password" 
+                    required
+                    class="w-full px-4 py-3 border rounded-lg text-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+                >
             </div>
+
             <div>
-            <button type="submit">Login</button>
+                <button 
+                    type="submit" 
+                    class="w-full bg-blue-500 text-white py-3 rounded-lg text-sm font-medium hover:bg-blue-600 transition-transform transform hover:scale-105"
+                >
+                    Login
+                </button>
             </div>
         </form>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

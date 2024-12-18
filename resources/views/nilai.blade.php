@@ -1,205 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @livewireStyles
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemantauan Progress Pengisian Nilai</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            height: 100vh;
-            background-color: #f4f6f8;
-            position: relative; 
-        }
-
-        .sidebar {
-            width: 220px;
-            background-color: #2c3e50; 
-            color: #ffffff;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100%;
-            transition: width 0.3s;
-        }
-
-        .sidebar h2 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #3b82f6; 
-        }
-
-        .sidebar a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-radius: 5px; 
-            transition: background-color 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #34495e; 
-            color: #3b82f6; 
-        }
-
-        .sidebar a i {
-            margin-right: 10px; 
-        }
-
-        .content {
-            margin-left: 240px; 
-            padding: 40px;
-            width: calc(100% - 240px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 40px; 
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        .progress-info {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #34495e;
-        }
-
-        .progress-info span {
-            font-weight: bold;
-            color: #3b82f6; 
-        }
-
-        button {
-            padding: 12px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block;
-            margin: 20px auto; 
-        }
-
-        button:hover {
-            background-color: #2563eb;
-        }
-
-        canvas {
-            max-width: 250px; 
-            max-height: 250px; 
-        }
-
-        .trademark {
-            position: absolute;
-            bottom: 20px; 
-            left: 240px; 
-            font-size: 1.2rem;
-            color: #2c3e50; 
-            font-weight: bold;
-        }
-
-        @media (max-width: 600px) {
-            .sidebar {
-                width: 100px;
-            }
-
-            .content {
-                margin-left: 120px;
-                width: calc(100% - 120px);
-            }
-
-            .container {
-                max-width: 90%;
-            }
-
-            .trademark {
-                left: 120px; 
-            }
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
 </head>
-<body>
-    <div class="sidebar">
-        <h2>Dashboard</h2>
-        <a href="/home"><i class="fas fa-calendar-alt"></i>Rekap Jadwal</a>
-        <a href="/nilai"><i class="fas fa-book"></i>Rekap Nilai</a>
-        <a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a> <!-- Upload Konten dan List Konten dihapus -->
-    </div>
-    <div class="content">
-        <div class="container">
-            <h1>Pemantauan Progress Pengisian Nilai</h1>
-            <div class="progress-info">
-                <p>Jumlah Nilai Sudah Dimasukkan: <span id="scores-entered">75</span></p>
-                <p>Jumlah Nilai Belum Dimasukkan: <span id="scores-missing">25</span></p>
+<body class="bg-gray-100 h-screen flex">
+    <!-- Sidebar -->
+    <aside class="bg-blue-600 text-white w-64 flex flex-col shadow-lg">
+    <h2 class="text-center text-2xl font-bold py-6 border-b border-blue-500">
+            <i class="fas fa-cog mr-2"></i> Admin Panel
+        </h2>
+        <nav class="flex-1 px-4 space-y-4 mt-6">
+            <a href="/home" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-700">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Rekap Jadwal</span>
+            </a>
+            <a href="/format" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-700">
+                <i class="fas fa-file-alt"></i>
+                <span>Format Jadwal</span>
+            </a>
+            <a href="/nilai" class="flex items-center space-x-4 p-3 rounded-lg bg-blue-700 hover:bg-blue-700">
+                <i class="fas fa-chart-bar"></i>
+                <span>Rekap Nilai</span>
+            </a>
+        </nav>
+        <form action="{{ route('logout') }}" method="POST" class="mt-auto p-4">
+            @csrf
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-center flex items-center justify-center space-x-2">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </form>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-6">
+        <div class="container mx-auto max-w-6xl bg-white shadow rounded-lg p-6 space-y-6">
+            <h2 class="text-xl font-bold text-gray-800">Rekap Nilai</h2>
+            @foreach ($detail as $key => $det)
+            <div class="gelombang-block border-b border-gray-200 pb-4">
+                <!-- Gelombang Header -->
+                <div class="gelombang-header flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700">
+                            {{ $det->first()->gelombang_name }} - {{ $det->first()->date }}
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            Total: {{ $det->first()->total_peserta }} - Status: 
+                            <span class="text-green-600 font-semibold">{{ $det->first()->sudah_terisi }}</span> /
+                            <span class="text-red-600 font-semibold">{{ $det->first()->belum_terisi }}</span>
+                        </p>
+                    </div>
+                    <button 
+                        class="toggle-button bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+                        onclick="toggleGelombang(this)">
+                        Details
+                    </button>
+                </div>
+
+                <!-- Gelombang Content -->
+                <div class="gelombang-content mt-4 hidden space-y-4">
+                    @foreach ($det as $d)
+                    <div class="block p-4 rounded-lg shadow-sm transition-shadow duration-300 
+                                {{ $d->completion == 1 ? 'bg-green-100' : 'bg-red-100' }}">
+                        <h4 class="text-gray-700 font-medium">
+                            {{ $d->no_peserta }} - {{ $d->peserta }} - {{ $d->prodi }} - {{ $d->pewawancara_name }}
+                        </h4>
+                    </div>
+                    @endforeach
+                </div>
             </div>
-            <canvas id="progressChart" width="250" height="250"></canvas> 
-            <button onclick="recapScores()">Rekap Nilai</button>
+            @endforeach
         </div>
-        <div class="trademark">MyPPMB</div> 
-    </div>
+    </main>
 
     <script>
-        const scoresEntered = 75;
-        const scoresMissing = 25;
-
-        const ctx = document.getElementById('progressChart').getContext('2d');
-        const progressChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Sudah Dimasukkan', 'Belum Dimasukkan'],
-                datasets: [{
-                    data: [scoresEntered, scoresMissing],
-                    backgroundColor: ['#3b82f6', '#f87171'],
-                    borderColor: '#ffffff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                }
+        function toggleGelombang(button) {
+            const gelombangContent = button.parentElement.nextElementSibling; 
+            if (gelombangContent.classList.contains('hidden')) {
+                gelombangContent.classList.remove('hidden');
+            } else {
+                gelombangContent.classList.add('hidden');
             }
-        });
-
-        function recapScores() {
-            alert('Rekap nilai telah dimulai!'); 
         }
     </script>
+
+    @livewireScripts
 </body>
 </html>
