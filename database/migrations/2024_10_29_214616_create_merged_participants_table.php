@@ -49,7 +49,7 @@ return new class extends Migration
             $table->foreign('id_gelombang')->references('id_gelombang')->on('gelombang')->onDelete('cascade');
             $table->timestamps();
         });
-  
+        
         Schema::create('pewawancara', function (Blueprint $table) {
             $table->string('id_pewawancara')->primary();;
             $table->string('pewawancara_name');
@@ -74,7 +74,7 @@ return new class extends Migration
             $table->boolean('completion')->default(false);
             $table->timestamps();
         });
-
+        
         Schema::create('host', function (Blueprint $table) {
             $table->string('id_host')->primary();
             $table->string('nama_host');

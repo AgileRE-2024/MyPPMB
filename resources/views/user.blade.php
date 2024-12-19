@@ -1,153 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @livewireStyles
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            height: 100vh;
-            background-color: #f4f6f8;
-            margin: 0;
-            position: relative;
-        }
-
-        .sidebar {
-            width: 210px;
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100%;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: width 0.3s;
-        }
-
-        .sidebar h2 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #3b82f6;
-        }
-
-        .sidebar a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 15px 0;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar a i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .sidebar a:hover {
-            background-color: #3b82f6;
-            color: #ffffff;
-        }
-
-        .content {
-            margin-left: 270px; 
-            padding: 40px;
-            width: calc(100% - 270px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #2c3e50;
-        }
-
-        .zoom-button {
-            padding: 12px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-align: center;
-            display: block;
-            width: 100%;
-        }
-
-        .zoom-button:hover {
-            background-color: #2563eb;
-        }
-
-        .trademark {
-            position: absolute;
-            bottom: 20px;
-            left: 270px;
-            font-size: 1.2rem;
-            color: #2c3e50;
-            font-weight: bold;
-        }
-
-        @media (max-width: 600px) {
-            .sidebar {
-                width: 100px;
-            }
-
-            .content {
-                margin-left: 120px;
-                width: calc(100% - 120px);
-            }
-
-            .container {
-                max-width: 90%;
-            }
-
-            .trademark {
-                left: 120px;
-            }
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
 </head>
-<body>
-    <div class="sidebar">
-        <h2>User Dashboard</h2>
-        <a href="/nilai"><i class="fas fa-graduation-cap"></i>Nilai</a>
-        <a href="/zoom"><i class="fas fa-video"></i>Ruang Zoom</a>
-        <a href="/"><i class="fas fa-sign-out-alt"></i>Log Out</a>
-    </div>
-    <div class="content">
-        <div class="container">
-            <h1>Selamat Datang</h1>
-            <p>Pilih opsi di sidebar untuk melanjutkan.</p>
-            <button class="zoom-button" onclick="enterZoom()">Masuk Ruang Zoom</button>
+<body class="bg-gray-100 h-screen flex">
+    <aside class="bg-blue-600 text-white w-64 flex flex-col shadow-lg">
+        <h2 class="text-center text-2xl font-bold py-6 border-b border-blue-500">
+            <i class="fas fa-comments mr-2"></i> MyPPMB
+        </h2>
+        <nav class="flex-1 px-4 space-y-4 mt-6">
+            <a href="/userhome" class="flex items-center space-x-4 p-3 rounded-lg bg-blue-700 hover:bg-blue-800">
+                <i class="fas fa-video"></i>
+                <span>Ruang Zoom</span>
+            </a>
+        </nav>
+        <form action="{{ route('logout') }}" method="POST" class="mt-auto p-4">
+            @csrf
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 py-2 rounded-lg text-center flex items-center justify-center space-x-2">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </form>
+    </aside>
+    <main class="flex-1 overflow-y-auto p-6">
+        <div class="container mx-auto max-w-7xl bg-white shadow rounded-lg p-6 space-y-8">
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+            <div class="bg-blue-100 p-6 rounded-lg shadow-lg flex items-center space-x-4">
+                    <i class="fas fa-user text-blue-600 text-3xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Total Peserta</h3>
+                        <p class="text-lg text-blue-600">{{ $totalParticipants }}</p>
+                    </div>
+                </div>
+                <div class="bg-green-100 p-6 rounded-lg shadow-lg flex items-center space-x-4">
+                    <i class="fas fa-video text-green-600 text-3xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Total Ruang Zoom</h3>
+                        <p class="text-lg text-green-600">{{ $totalZoomLinks }}</p>
+                    </div>
+                </div>
+                <div class="bg-yellow-100 p-6 rounded-lg shadow-lg flex items-center space-x-4">
+                    <i class="fas fa-clock text-yellow-600 text-3xl"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Gelombang Aktif</h3>
+                        <p class="text-lg text-yellow-600">{{ $activeGelombang }}</p>
+                    </div>
+            </div>
+
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Daftar Ruang Zoom</h2>
+                <div class="space-y-4">
+                    @foreach ($link_detail as $link => $detail)
+                        <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-blue-50 transition">
+                            <h3 class="font-medium text-gray-700">{{ $detail->gelombang_name }} - {{ $detail->date }}</h3>
+                            <button 
+                                class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+                                onclick="enterZoom('{{ $detail->link_ruang }}')"
+                            >
+                                Masuk Ruang Zoom
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Daftar Peserta Berdasarkan Gelombang</h2>
+                <div class="space-y-6">
+                    @foreach ($pesertaPerGelombang as $gelombangasek => $pesertas)
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                            <h3 
+                                class="font-medium text-gray-700 flex justify-between items-center cursor-pointer"
+                                onclick="toggleGelombang(this.nextElementSibling)">
+                                {{ $pesertas->first()->gelombang_name }} - {{ $pesertas->first()->gelombang_date }}
+                                <span class="text-sm text-gray-500">&#9660;</span>
+                            </h3>
+                            <div class="gelombang-content hidden mt-4 space-y-4">
+                                @foreach ($pesertas as $peserta)
+                                    <div class="block bg-white border rounded-lg shadow-sm p-4">
+                                        <livewire:update-participant :peserta="$peserta" />
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
         </div>
-        <div class="trademark">MyPPMB</div>
-    </div>
+    </main>
 
     <script>
-        function enterZoom() {
-            window.location.href = 'https://zoom.us/j/your_meeting_id'; 
+        function toggleGelombang(contentElement) {
+            if (contentElement.style.display === 'none' || !contentElement.style.display) {
+                contentElement.style.display = 'block';
+            } else {
+                contentElement.style.display = 'none';
+            }
+        }
+
+        function enterZoom(links) {
+            let link = links;
+            if (!/^https?:\/\//i.test(link)) {
+                link = 'http://' + link; 
+            }
+            window.open(link, '_blank');
         }
     </script>
+    @livewireScripts
 </body>
 </html>
