@@ -1,7 +1,9 @@
 ```markdown
 # 🌟 Laravel Project Installation Guide
 
-Welcome to our Laravel project, MyPPMB! Follow this guide to set up and run our application locally with ease.
+Welcome to our Laravel project, MyPPMB! 
+
+Follow this guide to set up and run our application locally with ease.
 
 Ensure your system has the following:
 - ✅ **PHP** 8.1 or higher
