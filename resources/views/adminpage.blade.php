@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" defer></script>
 </head>
 <body class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 h-screen flex">
-    <!-- Sidebar -->
     <aside class="bg-blue-600 text-white w-64 flex flex-col shadow-lg">
         <h2 class="text-center text-2xl font-bold py-6 border-b border-blue-500">
             <i class="fas fa-cog mr-2"></i> Admin Panel
